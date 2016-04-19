@@ -93,7 +93,10 @@ class MethodGenerator extends AbstractMemberGenerator
             return $body;
         }
 
-        $lines = explode(PHP_EOL, $body);
+        $lines = preg_replace('/\r\n?/', "\n", $body);
+        if (count($lines) > 0) {
+            $lines = explode("\n", $lines);
+        }
 
         $indention = str_replace(trim($lines[1]), '', $lines[1]);
 
